@@ -1,6 +1,8 @@
 package com.hjh.diexam02;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.context.annotation.Bean;
 
@@ -27,12 +29,12 @@ public class ApplicationContextConfiguration {
 	@Bean
 	public Member mem1() {
 		ArrayList<String> arr = new ArrayList<String>();
-		//ArrayList<String> arr2 ={"dd","dd"};
+		ArrayList<String> arr2 = new ArrayList(Arrays.asList("수영", "게임", "낚시"));
 		arr.add(0, "수영");
 		arr.add(1, "게임");
 		arr.add(2, "낚시");
 		
-		Member m1 = new Member("홍길동", "010-", "남자", arr);
+		Member m1 = new Member("홍길동", "010-", "남자", arr2);
 		return m1;
 	}
 	

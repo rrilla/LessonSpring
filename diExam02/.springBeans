@@ -10,6 +10,7 @@
 		<config>src/main/resources/bean_config.xml</config>
 		<config>src/main/resources/student_bean.xml</config>
 		<config>src/main/resources/member_bean.xml</config>
+		<config>src/main/resources/test_bean.xml</config>
 	</configs>
 	<autoconfigs>
 		<config>src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml</config>
