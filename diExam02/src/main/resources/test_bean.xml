@@ -8,8 +8,9 @@
 	<context:annotation-config></context:annotation-config>
 	<bean id="testb" class="com.hjh.diexam02_4.TestB"/>
 	<bean id="testc" class="com.hjh.diexam02_4.TestC"/>
-	<bean id="testa" class="com.hjh.diexam02_4.TestA">
-		
+	<bean id="testa" class="com.hjh.diexam02_4.TestA" autowire="byName">
+		<!-- <property name="b" ref="testb"/>
+		<property name="c" ref="testc"/> -->
 	</bean>
 
 </beans>

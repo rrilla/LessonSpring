@@ -19,9 +19,9 @@ public class TestA {
 //		this.c = c;
 //	}
 	public static void main(String[] args) {
-		ApplicationContext ctx=new
+		ApplicationContext ctx = new
 				ClassPathXmlApplicationContext("test_bean.xml");
-		TestA bean = (TestA)ctx.getBean("testa", TestA.class);
+		TestA bean = ctx.getBean("testa", TestA.class);
 		bean.b.display();
 		bean.c.display();
 	}
