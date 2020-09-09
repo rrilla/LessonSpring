@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="score1" class="com.hjh.diexam02_2.Score">
+		<constructor-arg value="kor"/>
+		<constructor-arg><value>80</value></constructor-arg>
+	</bean>
+	<bean id="score2" class="com.hjh.diexam02_2.Score">
+		<constructor-arg value="math"/>
+		<constructor-arg><value>85</value></constructor-arg>
+	</bean>
+	<bean id="score3" class="com.hjh.diexam02_2.Score">
+		<constructor-arg value="eng"/>
+		<constructor-arg><value>50</value></constructor-arg>
+	</bean>
+
+	<bean id="stud1" class="com.hjh.diexam02_2.Student">
+		<property name="name"><value>홍길동</value></property>
+		<property name="sno" value="1"/>
+		<property name="major" value="컴공"/>
+		<property name="score">
+			<list>
+				<ref bean="score1"></ref>
+				<ref bean="score2"></ref>
+				<ref bean="score3"></ref>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="stud2" class="com.hjh.diexam02_2.Student">
+		<property name="name"><value>한재현</value></property>
+		<property name="sno" value="2"/>
+		<property name="major" value="컴공"/>
+		<property name="score">
+			<list>
+				<ref bean="score1"/>
+				<ref bean="score3"/>
+			</list>
+		</property>
+	</bean>
+
+</beans>

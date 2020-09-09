@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="mem1" class="com.hjh.diexam02_3.Member">
+		<property name="name"><value>홍길동</value></property>
+		<property name="tel" value="010-"/>
+		<property name="gender" value="남자"/>
+		<property name="hobby">
+			<list>
+				<value>수영</value>
+				<value>게임</value>
+				<value>낚시</value>
+			</list>
+		</property>
+	</bean>
+		
+	<bean id="mem2" class="com.hjh.diexam02_3.Member">
+		<constructor-arg value="한재현"/>
+		<constructor-arg value="010-6422-2642"/>
+		<constructor-arg value="남자"/>
+		<constructor-arg>
+			<list>
+				<value>공부</value>
+				<value>자바</value>
+				<value>독서</value>
+				<value>운동</value>
+			</list>
+		</constructor-arg>
+	</bean>
+	
+</beans>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+<bean id="p1" class="com.hjh.diexam02.Person">
+	<constructor-arg value="이하윤"/>
+	<constructor-arg><value>25</value></constructor-arg>
+	<constructor-arg value="남자"/>
+</bean>
+
+<bean id="p2" class="com.hjh.diexam02.Person">
+	<constructor-arg value="한재현"/>
+	<constructor-arg><value>27</value></constructor-arg>
+	<constructor-arg value="남자"/>
+</bean>
+
+<bean id="p3" class="com.hjh.diexam02.Person">
+	<property name="age"><value>29</value></property>
+	<property name="gender" value="여자"/>
+	<property name="name" value="한수진"/>
+</bean>
+
+</beans>
