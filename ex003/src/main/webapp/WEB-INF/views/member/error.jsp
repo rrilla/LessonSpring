@@ -7,10 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h2>회원 정보</h2>
-	아디 : ${m.id }<br>
-	비번 : ${m.pw }<br>
-	나이 : ${m.age }<br>
-	등록일 : ${m.regDate }
+<h2>에러에러에러에러에러에러ㅔ어레어렝렁러ㅔㅇ</h2>
 </body>
 </html>
