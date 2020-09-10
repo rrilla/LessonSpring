@@ -26,6 +26,7 @@
 	</bean>
 	
 	<mybatis-spring:scan base-package="org.hjh.boardex001.mapper"/>
+	
 	<context:component-scan base-package="org.hjh.boardex001"/>
 	
 </beans>
