@@ -9,7 +9,7 @@ public class TestA {
 	private TestB b;
 	@Autowired
 	private TestC c;
-	
+		
 //	@Autowired
 //	public void setB(TestB b) {
 //		this.b = b;
