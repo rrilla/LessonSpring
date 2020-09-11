@@ -7,4 +7,21 @@
     select * from board where bno > 0
   </select>
   
+  <insert id="insert">
+  	insert into board(bno, title, content, writer)
+  	values(seq_board.nextval, #{title},#{content},#{writer}) 
+  </insert>
+  
+  <insert id="insertSelectKey">
+  	<selectKey keyProperty="bno" order="BEFORE" resultType="long">
+  		select seq_board.nextval from dual
+  	</selectKey>
+  	insert into board(bno, title, content, writer)
+  	values(#{bno}, #{title},#{content},#{writer}) 
+  </insert>
+  
+  <select id="selectNo" resultType="org.hjh.boardex001.domain.BoardVo" parameterType="int">
+    select * from board where bno = #{n}
+  </select>
+  
 </mapper>
