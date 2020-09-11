@@ -53,10 +53,31 @@ public class BoardController {
 		return "redirect:list";
 	}
 	
-	@GetMapping("/update")
-	public String update() {
-		
-		return "redirect:list";
+	@GetMapping("/delete")
+	public String delete(BoardVo bno) {
+		log.info("delete.....................................!");
+		long bno2 = bno.getBno();
+		boolean flag = service.remove(bno2);
+		if(flag) {
+			return "redirect:list";
+		}else {
+			return "redirect:get";
+		}
+	}
+	
+	@PostMapping("/update")
+	public String update(BoardVo board) {
+		log.info("update.....................................!");
+		if(service.modify(board))
+			return "redirect:list";
+		else
+			return "redirect:get";
+	}
+	
+	@GetMapping("/get")
+	public void get(Long bno, Model model) {
+		log.info("get");
+		model.addAttribute("board", service.get(bno));
 	}
 	
 }
