@@ -1,5 +1,9 @@
 package com.hjh.ex003.controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
@@ -35,10 +39,30 @@ public class ExController {
 //	}
 	
 	
+//	@PostMapping("/joinGo")
+//	public String joinGo1(BoardVo board, RedirectAttributes rttr) {
+//			rttr.addFlashAttribute("board", board);
+//			return "redirect:joinGo2";
+//	}
+//	
+//	@GetMapping("/joinGo")
+//	public @ResponseBody BoardVo print(BoardVo board) {
+//		//넘어오는 데이터 모델에 넣어서 뷰로 바로보냄
+//		//BoardVo vo = board;
+//		return board;
+//	}
+	
 	@PostMapping("/joinGo")
-	public @ResponseBody BoardVo print(BoardVo board) {
+	public @ResponseBody BoardVo print(HttpServletRequest request) {
 		//넘어오는 데이터 모델에 넣어서 뷰로 바로보냄
-		//BoardVo vo = board;
+		BoardVo board =  new BoardVo();
+		DateFormat df = new SimpleDateFormat("yyyyMMdd");
+		board.setBno(Long.parseLong(request.getParameter("bno")));
+		board.setTitle(request.getParameter("title"));
+		board.setContent(request.getParameter("content"));
+		board.setWriter(request.getParameter("writer"));
+		//board.setRegdate(df.parse(request.getParameter("regdate")));
+		//board.setUpdateDate(df.parse(request.getParameter("updateDate")));
 		return board;
 	}
 	
