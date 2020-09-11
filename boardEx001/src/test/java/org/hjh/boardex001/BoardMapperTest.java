@@ -91,7 +91,6 @@ public class BoardMapperTest {
 		int n = mapper.update(board);
 		if(n == 1) {
 			log.info("수정 성공");
-			
 		}
 	}
 }

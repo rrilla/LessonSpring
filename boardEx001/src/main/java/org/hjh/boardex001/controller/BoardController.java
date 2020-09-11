@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.java.Log;
@@ -45,9 +46,16 @@ public class BoardController {
 	}
 	
 	@PostMapping("/write")
-	public String write2(BoardVo board) {
+	public String write2(BoardVo board, RedirectAttributes rttr) {
 		log.info("write.....................................!");
 		service.register(board);
+		rttr.addFlashAttribute("resultBno", board.getBno());
+		return "redirect:list";
+	}
+	
+	@GetMapping("/update")
+	public String update() {
+		
 		return "redirect:list";
 	}
 	
