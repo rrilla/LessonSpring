@@ -54,10 +54,11 @@ public class BoardController {
 	}
 	
 	@GetMapping("/delete")
-	public String delete(BoardVo bno) {
+	//public String delete(Long bno) {
+	public String delete(BoardVo bno2) {
 		log.info("delete.....................................!");
-		long bno2 = bno.getBno();
-		boolean flag = service.remove(bno2);
+		long bno = bno2.getBno();
+		boolean flag = service.remove(bno);
 		if(flag) {
 			return "redirect:list";
 		}else {
