@@ -67,4 +67,31 @@ public class BoardMapperTest {
 		mapper.selectNo(4).forEach(board->log.info(board));
 	}
 	
+	@Test
+	public void testRead() {
+		BoardVo board = mapper.read(10l);
+		log.info(board);
+	}
+	
+	@Test
+	public void testDelete() {
+		int n = mapper.delete(5l);
+		if(n == 1) {
+			log.info("삭제 성공");
+		}
+	}
+	
+	@Test
+	public void testUpdate() {
+		BoardVo board = new BoardVo();
+		board.setBno(11l);
+		board.setTitle("수정했음");
+		board.setContent("수정했따고");
+		board.setWriter("내가 수정함");
+		int n = mapper.update(board);
+		if(n == 1) {
+			log.info("수정 성공");
+			
+		}
+	}
 }

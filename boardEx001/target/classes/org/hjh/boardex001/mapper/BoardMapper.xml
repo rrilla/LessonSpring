@@ -24,4 +24,17 @@
     select * from board where bno = #{n}
   </select>
   
+  <select id="read" resultType="org.hjh.boardex001.domain.BoardVo" parameterType="long"><!-- 타입생략가능 -->
+    select * from board where bno = #{bno}
+  </select>
+  
+  <delete id="delete">
+  	delete from board where bno = #{bno}
+  </delete>
+  
+  <update id="update">
+  	update board set title = #{title}, content = #{content}, writer = #{writer},
+  	updatedate = sysdate where bno = #{bno}
+  </update>
+  
 </mapper>
