@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.hjh.soloTest1.mapper.MemberMapper">
+  <select id="getList" resultType="org.hjh.soloTest1.domain.MemberVo">
+    select * from member where no > 0
+  </select>
+  
+  <insert id="insert">
+  	insert into member(no, name, address, comm)
+  	values(seq_member.nextval, #{name},#{address},#{comm}) 
+  </insert>
+  
+  <insert id="insertSelectKey">
+  	<selectKey keyProperty="no" order="BEFORE" resultType="long">
+  		select seq_member.nextval from dual
+  	</selectKey>
+  	insert into member(no, name, address, comm)
+  	values(#{no}, #{name},#{address},#{comm}) 
+  </insert>
+  
+  <select id="selectNo" resultType="org.hjh.soloTest1.domain.MemberVo" parameterType="int">
+    select * from member where no = #{n}
+  </select>
+  
+  <select id="read" resultType="org.hjh.soloTest1.domain.MemberVo" parameterType="long"><!-- 타입생략가능 -->
+    select * from member where no = #{no}
+  </select>
+  
+  <delete id="delete">
+  	delete from member where no = #{no}
+  </delete>
+  
+  <update id="update">
+  	update member set name = #{name}, address = #{address}, comm = #{comm} where no = #{no}
+  </update>
+  
+</mapper>

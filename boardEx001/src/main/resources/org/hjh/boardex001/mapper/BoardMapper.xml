@@ -2,6 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
 <mapper namespace="org.hjh.boardex001.mapper.BoardMapper">
   <select id="getList" resultType="org.hjh.boardex001.domain.BoardVo">
     select * from board where bno > 0

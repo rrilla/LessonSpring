@@ -11,6 +11,7 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+	<!-- <property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:XE"/> -->
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
 		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:XE"/>
 		<property name="username" value="spring"/>
@@ -23,10 +24,10 @@
 	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
-	</bean>
+	</bean><!-- mybatis db연결 -->
 	
 	<mybatis-spring:scan base-package="org.hjh.boardex001.mapper"/>
-	
+	<!-- 마이바티스 스캔할 위치, mapper 인터페이스 위치 -->
 	<context:component-scan base-package="org.hjh.boardex001"/>
 	
 </beans>

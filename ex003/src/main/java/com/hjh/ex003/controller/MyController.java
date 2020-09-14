@@ -63,17 +63,18 @@ public class MyController {
 		return "member/error";
 	}
 	
-	@GetMapping("/loginOK")
-	public String loginOK() {
-		return "member/login";
-	}
-	
 //	@GetMapping("/loginOK")
-//	public String login(@RequestParam("id") String id, @RequestParam("pw") String pw, Model model) {
-//		model.addAttribute("id", id);
-//		model.addAttribute("pw", pw);
+//	public String loginOK() {
 //		return "member/login";
 //	}
+	
+	@GetMapping("/loginOK")
+	public String login(@RequestParam("id") String id, @RequestParam("pw") String pw, Model model) {
+	//public String login(@ModelAttribute("id") String id, @ModelAttribute("pw") String pw, Model model) {
+		model.addAttribute("id", id);
+		model.addAttribute("pw", pw);
+		return "member/login";
+	}
 	
 	@GetMapping("/login")
 	public String loginForm() {
