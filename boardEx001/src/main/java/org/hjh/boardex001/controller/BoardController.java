@@ -29,10 +29,10 @@ public class BoardController {
 		model.addAttribute("list", service.getList());
 	}
 	
-	@GetMapping("/writeForm")
+	@GetMapping("/register")
 	public String writeForm(Model model) {
-		log.info("writeForm....................................!");
-		return "board/write";
+		log.info("register....................................!");
+		return "board/register";
 	}
 	
 //	@PostMapping("/write")
