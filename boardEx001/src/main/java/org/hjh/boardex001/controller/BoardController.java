@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.AllArgsConstructor;
@@ -34,16 +35,16 @@ public class BoardController {
 		return "board/write";
 	}
 	
-	//@PostMapping("/write")
-	public String write1(HttpServletRequest request) {
-		log.info("write.....................................!");
-		BoardVo board = new BoardVo();
-		board.setWriter(request.getParameter("writer"));
-		board.setTitle(request.getParameter("title"));
-		board.setContent(request.getParameter("content"));
-		service.register(board);
-		return "board/list";
-	}
+//	@PostMapping("/write")
+//	public String write1(HttpServletRequest request) {
+//		log.info("write.....................................!");
+//		BoardVo board = new BoardVo();
+//		board.setWriter(request.getParameter("writer"));
+//		board.setTitle(request.getParameter("title"));
+//		board.setContent(request.getParameter("content"));
+//		service.register(board);
+//		return "board/list";
+//	}
 	
 	@PostMapping("/write")
 	public String write2(BoardVo board, RedirectAttributes rttr) {
@@ -53,26 +54,27 @@ public class BoardController {
 		return "redirect:list";
 	}
 	
-	@GetMapping("/delete")
-	//public String delete(Long bno) {
-	public String delete(BoardVo bno2) {
-		log.info("delete.....................................!");
-		long bno = bno2.getBno();
+	@GetMapping("/remove")
+	public String delete(@RequestParam("bno") Long bno, RedirectAttributes rttr) {
+	//public String delete(BoardVo bno2) {
+		log.info("delete.........."+bno+".................!");
+		//long bno = bno2.getBno();
 		boolean flag = service.remove(bno);
 		if(flag) {
-			return "redirect:list";
-		}else {
-			return "redirect:get";
+			rttr.addFlashAttribute("result", "success");
+			//return "redirect:list";
 		}
+		return "redirect:/board/list";
+		
 	}
 	
-	@PostMapping("/update")
-	public String update(BoardVo board) {
+	@PostMapping("/modify")
+	public String update(BoardVo board, RedirectAttributes rttr) {
 		log.info("update.....................................!");
-		if(service.modify(board))
-			return "redirect:list";
-		else
-			return "redirect:get";
+		if(service.modify(board)) {
+			rttr.addFlashAttribute("result", "success");
+		}
+		return "redirect:list";
 	}
 	
 	@GetMapping("/get")
