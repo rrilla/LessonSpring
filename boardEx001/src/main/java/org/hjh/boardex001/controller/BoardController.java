@@ -1,9 +1,9 @@
 package org.hjh.boardex001.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.hjh.boardex001.domain.BoardVo;
 import org.hjh.boardex001.service.BoardService;
+import org.hjh.boardex001.util.Criteria;
+import org.hjh.boardex001.util.PageDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,10 +23,19 @@ public class BoardController {
 	
 	private BoardService service;
 	
+//	@GetMapping("/list")
+//	public void list(Model model) {
+//		log.info("list....................................!");
+//		model.addAttribute("list", service.getList());
+//	}
+	
 	@GetMapping("/list")
-	public void list(Model model) {
-		log.info("list....................................!");
-		model.addAttribute("list", service.getList());
+	public void list(Criteria cri, Model model) {
+		log.info("listPaging....................................!");
+		model.addAttribute("list", service.getList(cri));
+		
+		int total = service.getTotal();
+		model.addAttribute("pageMaker", new PageDTO(cri,total));
 	}
 	
 	@GetMapping("/register")
@@ -87,5 +96,6 @@ public class BoardController {
 		log.info("get");
 		model.addAttribute("board", service.get(bno));
 	}
+	
 	
 }

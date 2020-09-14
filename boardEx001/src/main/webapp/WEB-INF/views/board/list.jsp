@@ -17,7 +17,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             Board List
-                            <button id="regBtn" type="button" class="btn btn-xs pull-right">
+                            <button id="regBtn" type="button" class="btn btn-xs pull-right btn-primary">
                             	New Board
                             </button>
                         </div>
@@ -45,6 +45,22 @@
                             </table>
                         </div>
                         <!-- /.panel-body -->
+                        
+                        <div class="pull-right">
+                        	<ul class="pagination">
+                        		<c:if test="${pageMaker.prev }">
+                        			<li class="paginate_button previous"><a href="#">Previous</a></li>
+                        		</c:if>
+                        		
+                        		<c:forEach var="i" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
+                        			<li class="paginate_button"><a href="#"></a></li>
+                        		</c:forEach>
+                        		<c:if test="${pageMaker.next }">
+                        			li.paginate_button <next><a href="#Next"></a></next>
+                        		</c:if>
+                        	</ul>
+                        </div>
+                        
                     </div>
                     <!-- /.panel -->
                 </div>
