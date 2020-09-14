@@ -46,35 +46,40 @@ public class BoardController {
 //		return "board/list";
 //	}
 	
-	@PostMapping("/write")
+	@PostMapping("/register")
 	public String write2(BoardVo board, RedirectAttributes rttr) {
 		log.info("write.....................................!");
 		service.register(board);
-		rttr.addFlashAttribute("resultBno", board.getBno());
+		rttr.addFlashAttribute("result", board.getBno() + "번 등록 성공");
 		return "redirect:list";
 	}
 	
 	@GetMapping("/remove")
 	public String delete(@RequestParam("bno") Long bno, RedirectAttributes rttr) {
 	//public String delete(BoardVo bno2) {
-		log.info("delete.........."+bno+".................!");
+		log.info("delete.........." + bno + ".................!");
 		//long bno = bno2.getBno();
 		boolean flag = service.remove(bno);
 		if(flag) {
-			rttr.addFlashAttribute("result", "success");
+			rttr.addFlashAttribute("result", bno + "번 삭제 성공");
 			//return "redirect:list";
 		}
 		return "redirect:/board/list";
-		
 	}
 	
 	@PostMapping("/modify")
 	public String update(BoardVo board, RedirectAttributes rttr) {
 		log.info("update.....................................!");
 		if(service.modify(board)) {
-			rttr.addFlashAttribute("result", "success");
+			rttr.addFlashAttribute("result", board.getBno() + "번 수정 성공");
 		}
 		return "redirect:list";
+	}
+	
+	@GetMapping("/modify")
+	public void modify(Long bno, Model model) {
+		log.info("modify");
+		model.addAttribute("board", service.get(bno));
 	}
 	
 	@GetMapping("/get")
