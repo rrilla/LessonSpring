@@ -44,7 +44,7 @@ public class BoardController {
 		log.info("register....................................!");
 		return "board/register";
 	}
-	
+	 
 //	@PostMapping("/write")
 //	public String write1(HttpServletRequest request) {
 //		log.info("write.....................................!");
