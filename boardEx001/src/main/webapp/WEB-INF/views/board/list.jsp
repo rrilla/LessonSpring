@@ -43,30 +43,38 @@
                             		</tr>
                             	</c:forEach>
                             </table>
-                        </div>
-                        <!-- /.panel-body -->
-                        
-                        <div class="pull-right">
+                            
+                            <div class="pull-right">
                         	<ul class="pagination">
                         		<c:if test="${pageMaker.prev }">
-                        			<li class="paginate_button previous"><a href="#">Previous</a></li>
+                        			<li class="paginate_button previous"><a href="${pageMaker.startPage -1}">Previous</a></li>
                         		</c:if>
                         		
-                        		<c:forEach var="i" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
-                        			<li class="paginate_button"><a href="#"></a></li>
+                        		<c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
+                        			<li class='paginate_button ${pageMaker.cri.pageNum == num ? "active":""} '>
+                        				<a href="${num}">${num}</a>
+                        			</li>
                         		</c:forEach>
+                        		
                         		<c:if test="${pageMaker.next }">
-                        			li.paginate_button <next><a href="#Next"></a></next>
+                        			<li class="paginate_button next"><a href="${pageMaker.endPage +1 }">Next</a></li>
                         		</c:if>
                         	</ul>
+                        	</div>
+                            
                         </div>
-                        
+                        <!-- /.panel-body -->
                     </div>
                     <!-- /.panel -->
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
+            
+            <form action="/board/list" id="actionForm">
+            	<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }" />
+            	<input type="hidden" name="amount" value="${pageMaker.cri.amount }" />
+            </form>
             
             <!-- Modal -->
               <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -111,6 +119,16 @@
 		$("#regBtn").on("click", function() {
 			self.location="/board/register";
 		});
+		
+		var actionForm = $("#actionForm");
+		
+		$(".paginate_button a").on("click", function(e) {
+			e.preventDefault();
+			console.log("click");
+			actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+			actionForm.submit();
+		});
+		
 	});
 </script>
             
