@@ -71,7 +71,7 @@
                             		</option>
                             	</select>
                             	<input type="text" name="keyword" value="${pageMaker.cri.keyword }" />
-                            	<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }" />
+                            	<input type="hidden" name="pageNum" value="1" />
                             	<input type="hidden" name="amount" value="${pageMaker.cri.amount }" />
                             	<button class="btn btn-default" >Search</button>
                             </form>
@@ -129,6 +129,8 @@
             <form action="/board/list" id="actionForm">
             	<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }" />
             	<input type="hidden" name="amount" value="${pageMaker.cri.amount }" />
+            	<input type="hidden" name="type" value="${pageMaker.cri.type }" />
+            	<input type="hidden" name="keyword" value="${pageMaker.cri.keyword }" />
             </form>
             
 <script type="text/javascript">
@@ -167,6 +169,21 @@
 			actionForm.append("<input type='hidden' name='bno' value='"+$(this).attr("href")+"'/>");
 			actionForm.attr("action", "/board/get");
 			actionForm.submit();
+		});
+		
+		var searchForm = $("#searchForm");
+		$("#searchForm button").on("click", function(e) {
+			if(!searchForm.find("option:selected").val()){
+				alert("검색종류를 선택하세요.");
+				return false;
+			}
+			if(!searchForm.find("input[name='keyword']").val()){
+				alert("키워드를 입력하세요");
+				return false;
+			}
+			//actionForm.find("input[name='pageNum']").val(1);
+			e.preventDefault();
+			searchForm.submit();
 		});
 		
 	});

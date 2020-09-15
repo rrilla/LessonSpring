@@ -22,6 +22,5 @@ public interface BoardMapper {
 	public BoardVo read(Long bno);
 	public int update(BoardVo board);
 	public int delete(Long bno);
-	public int totalCount();
-	
+	public int totalCount(Criteria cri);
 }
