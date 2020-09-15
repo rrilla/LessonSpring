@@ -75,20 +75,26 @@ public class BoardController {
 			rttr.addFlashAttribute("result", bno + "번 삭제 성공");
 			//return "redirect:list";
 		}
+		rttr.addAttribute("pageNum", cri.getPageNum());
+		rttr.addAttribute("amount", cri.getAmount());
 		return "redirect:/board/list";
 	}
 	
 	@PostMapping("/modify")
-	public String update(BoardVo board, RedirectAttributes rttr) {
+	public String update(BoardVo board, RedirectAttributes rttr,
+			@ModelAttribute("cri") Criteria cri) {
 		log.info("update.....................................!");
 		if(service.modify(board)) {
 			rttr.addFlashAttribute("result", board.getBno() + "번 수정 성공");
 		}
+		rttr.addAttribute("pageNum", cri.getPageNum());
+		rttr.addAttribute("amount", cri.getAmount());
 		return "redirect:list";
 	}
 	
 	@GetMapping("/modify")
-	public void modify(Long bno, Model model) {
+	public void modify(Long bno, Model model,
+			@ModelAttribute("cri") Criteria cri) {
 		log.info("modify");
 		model.addAttribute("board", service.get(bno));
 	}

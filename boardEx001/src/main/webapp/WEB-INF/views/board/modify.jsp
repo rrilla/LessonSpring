@@ -18,7 +18,9 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <form action="/board/modify" method="post">
+                            <form role="form" action="/board/modify" method="post">
+                            	<input type="hidden" name="pageNum" value="${cri.pageNum }" />
+                            	<input type="hidden" name="amount" value="${cri.amount }" />
                             
                             	<div class="form-grop">
                             		<label for="">Bno</label>
@@ -38,6 +40,7 @@
                             	</div>
                             	
                             	<button type="submit" data-oper="modify" class="btn btn-primary">Modify</button>
+                            	<button type="reset" data-oper="reset" class="btn btn-default">reset</button>
                             	<button type="button" data-oper="list" class="btn btn-default">List</button>
                             </form>
                         </div>
