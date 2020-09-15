@@ -59,6 +59,8 @@
             
 <form id="operForm">
 	<input type="hidden" id="bno" name="bno" value="${board.bno }" />
+	<input type="hidden" id="pageNum" name="pageNum" value="${cri.pageNum }"/>
+	<input type="hidden" id="amount" name="amount" value="${cri.amount }"/>
 </form>            
             
 <script type="text/javascript">

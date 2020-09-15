@@ -7,6 +7,7 @@ import org.hjh.boardex001.util.PageDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -64,7 +65,8 @@ public class BoardController {
 	}
 	
 	@GetMapping("/remove")
-	public String delete(@RequestParam("bno") Long bno, RedirectAttributes rttr) {
+	public String delete(@RequestParam("bno") Long bno, RedirectAttributes rttr,
+			@ModelAttribute("cri") Criteria cri) {
 	//public String delete(BoardVo bno2) {
 		log.info("delete.........." + bno + ".................!");
 		//long bno = bno2.getBno();
@@ -92,7 +94,8 @@ public class BoardController {
 	}
 	
 	@GetMapping("/get")
-	public void get(Long bno, Model model) {
+	public void get(Long bno, Model model, 
+			@ModelAttribute("cri") Criteria cri) {
 		log.info("get");
 		model.addAttribute("board", service.get(bno));
 	}

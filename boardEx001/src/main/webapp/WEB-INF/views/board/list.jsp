@@ -24,7 +24,7 @@
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <table class="table table-striped table-bordered table-hover">
-                            	<theady>
+                            	<thead>
                             		<tr>
                             			<th>#번호</th>
                             			<th>제목</th>
@@ -32,11 +32,11 @@
                             			<th>작성일</th>
                             			<th>수정일</th>
                             		</tr>
-                            	</theady>
+                            	</thead>
                             	<c:forEach items="${list }" var="board">
                             		<tr>
                             			<td>${board.bno } </td>
-                            			<td><a href="get?bno=${board.bno }">${board.title } </a></td>
+                            			<td><a class="move" href="${board.bno }">${board.title } </a></td>
                             			<td>${board.writer } </td>
                             			<td><fmt:formatDate value="${board.regdate }" pattern="yyyy-MM-dd hh:mm:ss"/> </td>
                             			<td><fmt:formatDate value="${board.updatedate }" pattern="yyyy-MM-dd hh:mm:ss"/> </td>
@@ -123,9 +123,16 @@
 		var actionForm = $("#actionForm");
 		
 		$(".paginate_button a").on("click", function(e) {
-			e.preventDefault();
+			e.preventDefault();	//
 			console.log("click");
 			actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+			actionForm.submit();
+		});
+		
+		$(".move").on("click", function(e) {
+			e.preventDefault();
+			actionForm.append("<input type='hidden' name='bno' value='"+$(this).attr("href")+"'/>");
+			actionForm.attr("action", "/board/get");
 			actionForm.submit();
 		});
 		
