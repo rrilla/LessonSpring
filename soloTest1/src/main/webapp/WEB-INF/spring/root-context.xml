@@ -25,8 +25,8 @@
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
 	
-	<mybatis-spring:scan base-package="org.hjh.boardex001.mapper"/>
+	<mybatis-spring:scan base-package="org.hjh.soloTest1.mapper"/>
 	
-	<context:component-scan base-package="org.hjh.boardex001"/>
+	<context:component-scan base-package="org.hjh.soloTest1"/>
 		
 </beans>

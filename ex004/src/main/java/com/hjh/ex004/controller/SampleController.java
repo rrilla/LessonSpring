@@ -5,11 +5,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hjh.ex004.domain.SampleVO;
+import com.hjh.ex004.domain.Ticket;
 
 import lombok.extern.java.Log;
 
@@ -48,8 +54,34 @@ public class SampleController {
 		map.put("Lee", new SampleVO(1, "길동", "lee"));
 		map.put("Hong", new SampleVO(1, "길동", "Hong"));
 		return map;
+	}
 	
-
+	//ResponseEntity : 브라우저에 데이터 + HTTP상태  코드 등 추가적으로 전달 가능.
+	//http://localhost:8095/ex004/sample/check?height=140&weight=40
+	@GetMapping(value="/check", params = {"height", "weight"})
+	public ResponseEntity<SampleVO> check(Double height, Double weight){
+		SampleVO vo = new SampleVO(000, "" + height, "" + weight);
+		ResponseEntity<SampleVO> result = null;
+		if(height < 150)
+			result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(vo);
+		else
+			result = ResponseEntity.status(HttpStatus.OK).body(vo);
+		return result;
+	}
 	
-}
+	//PathVariable : URL경로 중간에 들어간 값을 얻기 위해 사용
+	//http://localhost:8095/ex004/sample/product/zz/2323    //cat=zz, pid=2323
+	@GetMapping("/product/{cat}/{pid}")
+	public String[] getPath(
+		@PathVariable("cat") String cat,
+		@PathVariable("pid") Integer pid){
+		return new String[] {"category : " + cat, "productid : " + pid};
+		}
+	
+	//RequestBody : json데이터 얻어올 때
+	@PostMapping("/ticket")
+	public Ticket convert(@RequestBody Ticket ticket) {
+		log.info("convert....ticket" + ticket);
+		return ticket;
+	}
 }
