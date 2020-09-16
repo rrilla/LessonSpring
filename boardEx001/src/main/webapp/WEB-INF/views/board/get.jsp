@@ -111,10 +111,10 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-	                        <button id="modifyBtn" type="button" class="btn btn-warning">Modify</button>
-	                        <button id="removeBtn" type="button" class="btn btn-danger">Remove</button>
-                            <button id="registerBtn" type="button" class="btn btn-primary">Register</button>
-                            <button id="closeBtn" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	                        <button id="modalModBtn" type="button" class="btn btn-warning">Modify</button>
+	                        <button id="modalRemoveBtn" type="button" class="btn btn-danger">Remove</button>
+                            <button id="modalRegisterBtn" type="button" class="btn btn-primary">Register</button>
+                            <button id="modalCloseBtn" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         </div>
                     </div>
                     <!-- /.modal-content -->
@@ -127,6 +127,29 @@
 	console.log("================================");
 	console.log("JS TEST");
 	var bnoValue = '<c:out value="${board.bno}"/>';
+	
+	var modal = $(".modal");
+	var modalInputReply = modal.find("input[name='reply']");
+	var modalInputReplyer = modal.find("input[name='replyer']");
+	var modalInputReplyDate = modal.find("input[name='replyDate']");
+	
+	var modalModBtn = $("#modalModBtn");
+	var modalRemoveBtn = $("#modalRemoveBtn");
+	var modalRegisterBtn = $("#modalRegisterBtn");
+	var modalCloseBtn = $("#modalCloseBtn");
+	
+	$("#modalCloseBtn").on("click", function(){
+		modal.modal("hide");
+	});
+	
+	$("#addReplyBtn").on("click", function(){
+		modal.find("input").val("");
+		modalInputReplyDate.closest("div").hide();
+		modal.find("button[id!='modalCloseBtn']").hide();
+		modalRegisterBtn.show();
+		$(".modal").modal("show");
+	});
+	
 	
 	/* replyService.add({reply:"JS Test", replyer:"tester", bno:bnoValue},
 					function(result){
@@ -155,9 +178,9 @@
 		alert("수정 성공");
 	}); */
 	
-	replyService.get(5, function(data){
+	/* replyService.get(5, function(data){
 		console.log(data);
-	});
+	}); */
 	
 	
 </script>            
