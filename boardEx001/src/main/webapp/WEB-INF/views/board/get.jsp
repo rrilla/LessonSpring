@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ include file="../include/header.jsp" %>
+<script type="text/javascript" src="/resources/js/reply.js"></script>
 
 			<div class="row">
                 <div class="col-lg-12">
@@ -63,9 +65,106 @@
 	<input type="hidden" id="amount" name="amount" value="${cri.amount }"/>
 	<input type="hidden" id="type" name="type" value="${cri.type }"/>
 	<input type="hidden" id="keyword" name="keyword" value="${cri.keyword }"/>
-</form>            
+</form>  
+
+			<div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-comments fa-fw"></i>Reply
+                            <button id="addReplyBtn" class="btn btn-primary btn-xs pull-right">New Reply</button>
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <ul class="chat">
+                            	댓글 뿔리거임
+                            </ul>
+                        </div>
+                        <!-- /.panel-body -->
+                        <div class="panel-footer"></div>
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="myModalLabel">Reply Modal</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                            	<label>Reply</label>
+                            	<input class="form-control" name="reply" value="reply" />
+                            </div>
+                            <div class="form-group">
+                            	<label>Reply</label>
+                            	<input class="form-control" name="replyer" value="replyer" />
+                            </div>
+                            <div class="form-group">
+                            	<label>Reply</label>
+                            	<input class="form-control" name="replyDate" value="2020-01-01" />
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+	                        <button id="modifyBtn" type="button" class="btn btn-warning">Modify</button>
+	                        <button id="removeBtn" type="button" class="btn btn-danger">Remove</button>
+                            <button id="registerBtn" type="button" class="btn btn-primary">Register</button>
+                            <button id="closeBtn" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
             
 <script type="text/javascript">
+	console.log("================================");
+	console.log("JS TEST");
+	var bnoValue = '<c:out value="${board.bno}"/>';
+	
+	/* replyService.add({reply:"JS Test", replyer:"tester", bno:bnoValue},
+					function(result){
+						alert("RESULT : " + result);
+					}
+	);
+	
+	replyService.getList({bno:bnoValue, page:1}, function(list){
+		var len = list.length || 0;
+		for(var i=0; i<len; i++){
+			console.log(list[i]);
+		}
+	}) */
+	
+	/* replyService.remove(7, function(count){
+		console.log(count);
+		if(count=="success"){
+			alert("삭제 성공");
+		}
+	}, function(err){
+			alert("error");
+	}); */
+	
+	/* replyService.update({rno:5, bno:bnoValue, reply:"Modified reply", replyer:"medol2"},
+			function(result){
+		alert("수정 성공");
+	}); */
+	
+	replyService.get(5, function(data){
+		console.log(data);
+	});
+	
+	
+</script>            
+            
+<script type="text/javascript">
+
+
 	$(document).ready(function (){
 		var operForm=$("#operForm");
 		

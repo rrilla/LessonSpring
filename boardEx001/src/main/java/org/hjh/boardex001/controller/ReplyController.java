@@ -36,7 +36,7 @@ public class ReplyController {
 		log.info("ReplyVO : " + vo);
 		int insertCount = service.register(vo);
 		log.info("Reply INSERT COUNT : " + insertCount);
-		return insertCount == 1 ? new ResponseEntity<>("succes", HttpStatus.OK)
+		return insertCount == 1 ? new ResponseEntity<>("success", HttpStatus.OK)
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
