@@ -108,14 +108,14 @@
 		var dateObj = new Date(timeValue);
 		var str = "";
 
-		if (gap < (1000 * 60 * 60 * 24)) {
+		if (gap < (1000 * 60 * 60 * 24)) {	//날짜는 millisecond
 
 			var hh = dateObj.getHours();
 			var mi = dateObj.getMinutes();
 			var ss = dateObj.getSeconds();
 
 			return [ (hh > 9 ? '' : '0') + hh, ':', (mi > 9 ? '' : '0') + mi,
-					':', (ss > 9 ? '' : '0') + ss ].join('');
+					':', (ss > 9 ? '' : '0') + ss ].join('');	//join??
 
 		} else {
 			var yy = dateObj.getFullYear();
