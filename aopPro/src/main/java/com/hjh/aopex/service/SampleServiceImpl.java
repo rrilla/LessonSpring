@@ -1,0 +1,14 @@
+package com.hjh.aopex.service;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class SampleServiceImpl implements SampleService {
+
+	@Override
+	public Integer doAdd(String str1, String str2) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

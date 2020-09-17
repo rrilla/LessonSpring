@@ -160,7 +160,7 @@
 			modalInputReply.val(reply.reply);
 			modalInputReplyer.val(reply.replyer);
 			modalInputReplyDate.val(replyService.displayTime(reply.replyDate)).
-			attr("readonly", "readonly");
+				attr("readonly", "readonly");
 			modal.data("rno", reply.rno);
 			modal.find("button[id != 'modalCloseBtn']").hide();
 			modalModBtn.show();
