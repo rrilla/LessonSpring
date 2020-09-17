@@ -24,6 +24,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public BoardVo get(Long bno) {
+		boardMapper.readCount(bno);
 		return boardMapper.read(bno);
 	}
 

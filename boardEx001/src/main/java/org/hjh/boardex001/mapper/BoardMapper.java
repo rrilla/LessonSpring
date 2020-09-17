@@ -2,6 +2,7 @@ package org.hjh.boardex001.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.hjh.boardex001.domain.BoardVo;
 import org.hjh.boardex001.util.Criteria;
 
@@ -23,4 +24,6 @@ public interface BoardMapper {
 	public int update(BoardVo board);
 	public int delete(Long bno);
 	public int totalCount(Criteria cri);
+	public int readCount(Long bno);
+	public int replyCount(@Param("amount") int amount, @Param("bno") Long bno);
 }
