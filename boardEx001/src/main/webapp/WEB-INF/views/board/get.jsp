@@ -102,11 +102,11 @@
                             	<input class="form-control" name="reply" value="reply" />
                             </div>
                             <div class="form-group">
-                            	<label>Reply</label>
+                            	<label>Replyer</label>
                             	<input class="form-control" name="replyer" value="replyer" />
                             </div>
                             <div class="form-group">
-                            	<label>Reply</label>
+                            	<label>ReplyDate</label>
                             	<input class="form-control" name="replyDate" value="2020-01-01" />
                             </div>
                         </div>
@@ -129,26 +129,6 @@
 	var bnoValue = '<c:out value="${board.bno}"/>';
 	var replyUL = $(".chat");
 	
-	showList(1);
-	function showList(page){
-		replyService.getList({bno:bnoValue, page:page || 1}, function(list){
-			var str="";
-			if(list == null || list.length == 0){
-				replyUL.html("");
-				return;
-			}
-			for(var i=0, len=list.length || 0; i<len; i++){
-				str +="<li class='left clearfix' data-rno='"+list[i].rno+"'>";
-				str +="<div><div class='header'><strong class='primary-font'>"+
-					list[i].replyer+"</strong>";
-				str +="<small class='pull-right text-muted'>"+
-				replyService.displayTime(list[i].replyDate)+"</small></div>";
-				str +="<p>"+list[i].reply+"</p></div></li>";
-			}
-			replyUL.html(str);
-		});
-	}
-	
 	var modal = $(".modal");
 	var modalInputReply = modal.find("input[name='reply']");
 	var modalInputReplyer = modal.find("input[name='replyer']");
@@ -158,6 +138,8 @@
 	var modalRemoveBtn = $("#modalRemoveBtn");
 	var modalRegisterBtn = $("#modalRegisterBtn");
 	//var modalCloseBtn = $("#modalCloseBtn");
+	
+	showList(1);
 	
 	$("#modalCloseBtn").on("click", function(){
 		modal.modal("hide");
@@ -171,19 +153,102 @@
 		$(".modal").modal("show");
 	});
 	
+	$(".chat").on("click", "li", function(e){
+		var rno = $(this).data("rno");
+		
+		replyService.get(rno, function(reply){
+			modalInputReply.val(reply.reply);
+			modalInputReplyer.val(reply.replyer);
+			modalInputReplyDate.val(replyService.displayTime(reply.replyDate)).
+			attr("readonly", "readonly");
+			modal.data("rno", reply.rno);
+			modal.find("button[id != 'modalCloseBtn']").hide();
+			modalModBtn.show();
+			modalRemoveBtn.show();
+			$(".modal").modal("show");
+		});
+	});
+	
+	modalRegisterBtn.on("click", function(){
+		var reply = {
+				reply : modalInputReply.val(),
+				replyer : modalInputReplyer.val(),
+				bno : bnoValue
+		};
+	
+		replyService.add(reply, function(result){
+			if(result=="success")
+				alert("등록 성공.");
+			else
+				alert("등록 실패.");
+			modal.find("input").val("");
+			modal.modal("hide");
+			showList(1);
+		});
+	});
+	
+	modalModBtn.on("click", function() {
+		var reply = {
+				rno : modal.data("rno"),
+				reply : modalInputReply.val(),
+				replyer : modalInputReplyer.val()
+		};
+		
+		replyService.update(reply, function(result){
+			if(result=="success")
+				alert("수정 성공.");
+			else
+				alert("수정 실패.");
+			modal.modal("hide");
+			showList(1);
+		});
+	});
+	
+	modalRemoveBtn.on("click", function(e) {
+		var rno = modal.data("rno");
+		
+		replyService.remove(rno, function(result){
+			if(result=="success")
+				alert("삭제 성공.");
+			else
+				alert("삭제 실패.");
+			modal.modal("hide");
+			showList(1);
+		});
+	});
+	
+	function showList(page){
+		replyService.getList({bno:bnoValue, page:page || 1}, function(list){
+			var str="";
+			if(list == null || list.length == 0){
+				replyUL.html("");
+				return;
+			}
+			for(var i=0, len=list.length || 0; i<len; i++){
+				str +="<li class='left clearfix' data-rno='"+list[i].rno+"'>";
+				str +="<div><div class='header'><strong class='primary-font'>"+
+					list[i].replyer+"</strong>";
+				str +="<small class='pull-right text-muted'>"+
+					replyService.displayTime(list[i].replyDate)+"</small></div>";
+				str +="<p>"+list[i].reply+"</p></div></li>";
+			}
+			replyUL.html(str);
+		});
+	}
+	
 	/* replyService.add({reply:"JS Test", replyer:"tester", bno:bnoValue},
 					function(result){
 						alert("RESULT : " + result);
 					}
 	); */
 	
-	replyService.getList({bno:bnoValue, page:1}, function(list){
+	/* replyService.getList({bno:bnoValue, page:1}, function(list){
 		var len = list.length || 0;
 		for(var i=0; i<len; i++){
 		//for(var i=0, len=list.length || 0; i<len; i++){
 			console.log(list[i]);
 		}
-	})
+	}) */
 	
 	/* replyService.remove(7, function(count){
 		console.log(count);
