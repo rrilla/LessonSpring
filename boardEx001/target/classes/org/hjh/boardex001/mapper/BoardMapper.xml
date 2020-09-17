@@ -33,7 +33,7 @@
   		select bno,title,content,writer,regdate,updatedate,readcount,replycount
   		from (
   			select /*+INDEX_DESC(board pk_board)*/
-  			rownum rn, bno, title, content, writer, regdate, updatedate
+  			rownum rn, bno, title, content, writer, regdate, updatedate,readcount,replycount
   			from board where 
   			]]>
   			<include refid="criteria"></include>
@@ -84,7 +84,7 @@
   </update>
   
   <update id="replyCount">
-  	update board set replycount = replycount + #{cnt} where bno = #{bno}
+  	update board set replycount = replycount + #{amount} where bno = #{bno}
   </update>
   
   <update id="update">

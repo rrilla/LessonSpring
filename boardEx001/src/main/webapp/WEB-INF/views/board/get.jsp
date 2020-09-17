@@ -71,7 +71,7 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <i class="fa fa-comments fa-fw"></i>Reply
+                            <i class="fa fa-comments fa-fw"></i>Reply <span class="replyCnt">[${board.replycount }]</span>
                             <button id="addReplyBtn" class="btn btn-primary btn-xs pull-right">New Reply</button>
                         </div>
                         <!-- /.panel-heading -->
@@ -232,6 +232,7 @@
 					replyService.displayTime(list[i].replyDate)+"</small></div>";
 				str +="<p>"+list[i].reply+"</p></div></li>";
 			}
+			$(".replyCnt").html("[" + list.length + "]");
 			replyUL.html(str);
 		});
 	}
