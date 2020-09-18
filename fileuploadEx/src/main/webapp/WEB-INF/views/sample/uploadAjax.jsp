@@ -43,6 +43,16 @@
 			return true;
 		}
 		
+		function showUploadedFile(uploadResultArr) {
+			var str = ""; 
+			$(uploadResultArr).each(function(i, obj) { 
+				str += "<li>" + obj.fileName + "</li>";
+			}); 
+			
+			uploadResult.append(str); 
+			return str;
+		}
+		
 		$("#uploadBtn").on("click", function() {
 			var formData = new FormData();	//formData 객체 생성
 			var inputFile = $("input[name='uploadFile']");
@@ -61,11 +71,15 @@
 				contentType : false,	//파일 업로드시 반드시 입력
 				data : formData,
 				type : "POST",
+				dataType : "json",	//return data 타입
 				success : function(result){
-					alert(result);
+					alert("success");
+					console.log(result);
+					var str = showUploadedFile(result);
+					$(".uploadDiv").html(str);
 				},
 				error : function(){
-					alert(result);
+					alert("error");
 				}
 			});
 		});
