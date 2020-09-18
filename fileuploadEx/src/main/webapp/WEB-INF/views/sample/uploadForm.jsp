@@ -4,11 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Form 파일 업로드</title>
 </head>
 <body>
 	<form action="uploadFormAction" method="post" enctype="multipart/form-data">
-		<input type="file" multiple />
+		<input type="file" name="uploadFile" multiple />
 		<button type="submit">submit</button>
 	</form>
 </body>
