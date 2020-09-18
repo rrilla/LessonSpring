@@ -29,6 +29,7 @@
 		
 		var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
 		var maxSize = 5242880;
+		var uploadResult = $(".uploadResult ul")
 		
 		function checkExtension(fileName, fileSize){
 			if(fileSize >= maxSize){
@@ -50,8 +51,9 @@
 			}); 
 			
 			uploadResult.append(str); 
-			return str;
 		}
+		
+		var cloneObj = $(".uploadDiv").clone();
 		
 		$("#uploadBtn").on("click", function() {
 			var formData = new FormData();	//formData 객체 생성
@@ -75,8 +77,8 @@
 				success : function(result){
 					alert("success");
 					console.log(result);
-					var str = showUploadedFile(result);
-					$(".uploadDiv").html(str);
+					showUploadedFile(result);
+					$(".uploadDiv").html(cloneObj.html());
 				},
 				error : function(){
 					alert("error");
