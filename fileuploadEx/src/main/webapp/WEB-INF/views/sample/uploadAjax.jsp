@@ -7,6 +7,7 @@
 <title>Ajax 파일 업로드</title>
 </head>
 <body>
+	<h1>Ajax 파일 업로드</h1>
 	<div class="uploadDiv">
 		<input type="file" name="uploadFile" multiple />
 	</div>
@@ -26,29 +27,52 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		
+		var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
+		var maxSize = 5242880;
+		
+		function checkExtension(fileName, fileSize){
+			if(fileSize >= maxSize){
+				alert("파일 사이즈 초과");
+				return false;
+			}
+			
+			if(regex.test(fileName)){
+				alert("해당 종류의 파일 업로드 x");
+				return false;
+			}
+			return true;
+		}
+		
 		$("#uploadBtn").on("click", function() {
-			var formData = "";	//formData 객체 생성
+			var formData = new FormData();	//formData 객체 생성
 			var inputFile = $("input[name='uploadFile']");
 			var files = inputFile[0].files;
 			console.log(files);
 			
 			for(var i=0; i<files.length; i++){
+				if(!checkExtension(files[i].name, files[i].size))
+					return false;
 				formData.append("uploadFile", files[i]);
 			}
 			
 			$.ajax({
-				url : "/sample/uploadAjaxAction",
+				url : "uploadAjaxAction",
 				processData : false,	//파일 업로드시 반드시 입력
 				contentType : false,	//파일 업로드시 반드시 입력
 				data : formData,
-				type : "post",
+				type : "POST",
 				success : function(result){
-					alert("upload success");
+					alert(result);
+				},
+				error : function(){
+					alert(result);
 				}
 			});
 		});
 		
 	});
+	
+	
 </script>
 
 </body>
