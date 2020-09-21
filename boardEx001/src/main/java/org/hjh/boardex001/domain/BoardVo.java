@@ -1,6 +1,7 @@
 package org.hjh.boardex001.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 
@@ -14,4 +15,5 @@ public class BoardVo {
 	private Date updatedate;
 	private int readcount;
 	private int replycount;
+	private List<BoardAttachVo> attachList; 
 }

@@ -27,6 +27,13 @@
 			</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
+		
+		<multipart-config>
+			<location>E:\\upload\\temp</location>	<!-- 저장경로 -->
+			<max-file-size>20971520</max-file-size>	<!-- 한 파일의 최대 크기 -->
+			<max-request-size>41943040</max-request-size>	<!-- 여러 파일 업로드시 최대 크기 -->
+			<file-size-threshold>20971520</file-size-threshold>	<!-- 메모리 사이즈 -->
+		</multipart-config>
 	</servlet>
 
 	<servlet-mapping>

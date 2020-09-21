@@ -23,6 +23,9 @@
 	
 	<context:component-scan base-package="org.hjh.boardex001" />
 	
-	
+	<beans:bean 
+		id="multipartResolver" 
+		class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
+	</beans:bean>
 	
 </beans:beans>

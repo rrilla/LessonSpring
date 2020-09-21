@@ -236,6 +236,7 @@ public class SampleController {
 		return str.replace("-", File.separator);
 	}
 
+	//파일이 이미지인지 검사 메서드.
 	private boolean checkImageType(File file) {
 		try {
 			String contentType = Files.probeContentType(file.toPath());
