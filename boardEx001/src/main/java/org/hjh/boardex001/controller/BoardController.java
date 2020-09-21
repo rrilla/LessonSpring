@@ -1,9 +1,15 @@
 package org.hjh.boardex001.controller;
 
+import java.util.List;
+
+import org.hjh.boardex001.domain.BoardAttachVo;
 import org.hjh.boardex001.domain.BoardVo;
 import org.hjh.boardex001.service.BoardService;
 import org.hjh.boardex001.util.Criteria;
 import org.hjh.boardex001.util.PageDTO;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.AllArgsConstructor;
@@ -58,7 +65,12 @@ public class BoardController {
 	
 	@PostMapping("/register")
 	public String write2(BoardVo board, RedirectAttributes rttr) {
-		log.info("write.....................................!");
+		log.info("registerPro.....................................!");
+		
+		if(board.getAttachList() != null) {
+			board.getAttachList().forEach(attach->log.info("첨부파일 리스트 : "+attach));
+		}
+		
 		service.register(board);
 		rttr.addFlashAttribute("result", board.getBno() + "번 등록 성공");
 		return "redirect:list";
@@ -108,6 +120,17 @@ public class BoardController {
 			@ModelAttribute("cri") Criteria cri) {
 		log.info("get");
 		model.addAttribute("board", service.get(bno));
+	}
+	
+	@GetMapping(value = "/getAttachList",
+		    produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	ResponseEntity<List<BoardAttachVo>> getAttachList(Long bno) {
+
+		log.info("getAttachList " + bno);
+
+		return new ResponseEntity<>(service.getAttachList(bno), HttpStatus.OK);
+
 	}
 	
 	

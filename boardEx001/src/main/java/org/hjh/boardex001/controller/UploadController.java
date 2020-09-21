@@ -34,14 +34,12 @@ import net.coobird.thumbnailator.Thumbnailator;
 
 @Log
 @Controller
-@AllArgsConstructor
-@RequestMapping("")
 public class UploadController {
 
 	@PostMapping(value = "/uploadAjaxAction", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public ResponseEntity<List<BoardAttachVo>> uploadAjaxPost(MultipartFile[] uploadFile) {
-
+		System.out.println("zzzzz");
 		List<BoardAttachVo> list = new ArrayList<BoardAttachVo>();
 		String uploadFolder = "C:\\upload";
 
@@ -78,7 +76,7 @@ public class UploadController {
 
 				// check image type file
 				if (checkImageType(saveFile)) {
-					attachVO.setFiletype(true);
+					attachVO.setFileType(true);
 					FileOutputStream thumbnail = new FileOutputStream(new File(uploadPath, "s_" + uploadFileName));
 					Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumbnail, 100, 100);
 					thumbnail.close();
